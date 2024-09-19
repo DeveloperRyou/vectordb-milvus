@@ -16,3 +16,12 @@ def find_random_data(collection, number_of_data):
 
     results = collection.search(query_vectors, anns_field="vector", param=search_params, limit=number_of_data)
     return results
+
+
+def insert_data_to_milvus(collection, paper_id, paper_text_vector):
+    collection.insert([
+        [paper_id],
+        [paper_text_vector],
+    ])
+    collection.flush()
+    print(f"Inserted paper {paper_id} and its review into Milvus.")
